@@ -3,53 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Acme Expenses | Developer Console</title>
+    <title>Acme Expenses</title>
     <style>
+      /* --- AQUÍ EMPIEZA LA MAGIA DEL CSS --- */
       :root {
         --primary: #0f172a;
-        --primary-hover: #1e293b;
-        --border: #e2e8f0;
-        --bg-subtle: #f8fafc;
-        --text-main: #334155;
-        --text-label: #64748b;
-        --focus-ring: rgba(15, 23, 42, 0.2);
+        --surface: #ffffff;
+        --bg-body: #f1f5f9;
+        --border: #cbd5e1;
+        --text-muted: #64748b;
+        --focus-ring: rgba(15, 23, 42, 0.15);
         color-scheme: light dark;
       }
 
       body {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        background-color: #f1f5f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
+        font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
         padding: 20px;
-        color: var(--text-main);
+        background-color: var(--bg-body);
+        color: #1e293b;
+        /* Centramos la tarjeta en la pantalla pa' que se vea serio */
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        margin: 0;
       }
 
-      /* Esta es la tarjeta principal, el corral del ganado */
       .card {
-        background: white;
+        background-color: var(--surface);
         border: 1px solid var(--border);
         border-radius: 16px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
         padding: 24px;
         width: 100%;
-        max-width: 600px;
-      }
-
-      .header {
-        margin-bottom: 20px;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 15px;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--primary);
+        max-width: 520px; /* Le ponemos un tope pa' que no se desparrame */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
 
       label {
@@ -58,42 +46,44 @@
         font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: var(--text-label);
+        color: var(--text-muted);
         margin-bottom: 6px;
       }
 
-      /* Inputs bien pulíos */
       input, select, button {
         width: 100%;
-        height: 42px;
-        border-radius: 8px;
+        height: 44px;
+        border-radius: 8px; /* Bordes un pelín más cerrados */
         border: 1px solid var(--border);
         padding: 0 12px;
         font-size: 14px;
-        background: white;
-        transition: all 0.2s ease;
-        box-sizing: border-box; /* Pa que no se descuadre */
+        box-sizing: border-box; /* Importante pa' que no se salga del cajón */
+        transition: all 0.2s ease-in-out;
+        background-color: #fff;
       }
 
       input:focus, select:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px var(--focus-ring);
+        box-shadow: 0 0 0 4px var(--focus-ring);
       }
 
-      /* El botón machorro */
       button {
         font-weight: 600;
         background: var(--primary);
         color: white;
         cursor: pointer;
         border: none;
-        margin-top: 10px;
+        margin-top: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 13px;
       }
 
       button:hover {
-        background-color: var(--primary-hover);
+        background-color: #1e293b;
         transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
 
       button:active {
@@ -101,14 +91,14 @@
       }
 
       button:disabled {
-        opacity: 0.7;
+        opacity: 0.6;
         cursor: not-allowed;
-        background-color: var(--text-label);
+        transform: none;
+        box-shadow: none;
       }
 
-      /* La consola de salida */
       pre {
-        margin-top: 20px;
+        margin: 0;
         white-space: pre-wrap;
         word-break: break-word;
         font-size: 12px;
@@ -116,98 +106,53 @@
         padding: 16px;
         border-radius: 8px;
         border: 1px solid var(--border);
-        background: var(--bg-subtle);
-        color: var(--text-main);
-        min-height: 80px;
-        overflow-y: auto;
+        background: #f8fafc;
+        color: #334155;
+        min-height: 60px; /* Altura mínima pa' que no se vea feo vacío */
       }
 
-      .grid { display: grid; gap: 16px; }
+      .grid {
+        display: grid;
+        gap: 16px; /* Un pelín más de aire */
+      }
 
       @media (min-width: 560px) {
-        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
       }
-
-      /* Un adornito visual pa cuando carga */
-      .status-indicator {
-        font-size: 12px;
-        color: var(--text-label);
-        margin-top: 8px;
-        text-align: right;
-        min-height: 18px;
-      }
+      /* --- FIN DEL CSS --- */
     </style>
   </head>
   <body>
-
     <div class="card">
-      <div class="header">
-        <h1>Acme Expenses Debugger</h1>
-      </div>
-
       <div class="grid">
-        <div>
-          <label for="hostOrigin">Host Origin (Parent)</label>
-          <input id="hostOrigin" type="url" placeholder="https://mybudgetsocial.com" value="" />
-        </div>
-
-        <div class="row">
+        <div class="grid">
           <div>
-            <label for="action">Action Type</label>
-            <select id="action">
-                <option value="" disabled selected>Select an action...</option>
-                <option value="verify">Verify User</option>
-                <option value="sync">Sync Data</option>
-                <option value="logout">Logout</option>
-            </select>
+            <label for="hostOrigin">Host origin (allowedParentOrigin)</label>
+            <input id="hostOrigin" type="url" placeholder="https://mybudgetsocial.com" value="<PUT_HOST_ORIGIN_HERE>" />
           </div>
-          <div>
-            <label for="timeoutMs">Timeout (ms)</label>
-            <input id="timeoutMs" type="number" inputmode="numeric" placeholder="8000" value="8000" />
+          <div class="row">
+            <div>
+              <label for="action">Action</label>
+              <select id="action"></select>
+            </div>
+            <div>
+              <label for="timeoutMs">Timeout (ms)</label>
+              <input id="timeoutMs" type="number" inputmode="numeric" placeholder="8000" value="8000" />
+            </div>
           </div>
+
+          <div id="fields" class="grid"></div>
+
+          <button id="btnRun" type="button">Run</button>
         </div>
 
-        <div id="fields" class="grid"></div>
-
-        <div>
-            <button id="btnRun" type="button">Execute Action</button>
-            <div id="status" class="status-indicator">Ready to run</div>
-        </div>
+        <pre id="out"></pre>
       </div>
-
-      <label for="out" style="margin-top: 20px;">Console Output</label>
-      <pre id="out">// Waiting for execution...</pre>
     </div>
-
-    <script>
-      const btn = document.getElementById('btnRun');
-      const out = document.getElementById('out');
-      const status = document.getElementById('status');
-
-      btn.addEventListener('click', () => {
-        // Simular que estamos trabajando
-        btn.disabled = true;
-        btn.textContent = 'Processing...';
-        status.textContent = 'Contacting host...';
-        out.textContent = '// Running request...';
-
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.textContent = 'Execute Action';
-          status.textContent = 'Done.';
-          
-          const result = {
-            status: "success",
-            timestamp: new Date().toISOString(),
-            data: {
-              message: "Primo, el código corrió más duro que caballo cuatrero.",
-              origin: document.getElementById('hostOrigin').value || "No origin set"
-            }
-          };
-          
-          out.textContent = JSON.stringify(result, null, 2);
-        }, 1500);
-      });
-    </script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
