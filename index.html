@@ -5,23 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Acme Expenses</title>
     <style>
-      /* --- AQUÍ EMPIEZA LA MAGIA DEL CSS --- */
+      /* --- ESTILO VEGUERO MODERNO (CSS) --- */
       :root {
-        --primary: #0f172a;
+        --primary: #3b82f6; /* Un azul más vivo, más moderno */
+        --primary-dark: #1d4ed8;
+        --accent: #0f172a;
+        --bg-body: #f8fafc;
         --surface: #ffffff;
-        --bg-body: #f1f5f9;
-        --border: #cbd5e1;
+        --border: #e2e8f0;
+        --text-main: #334155;
         --text-muted: #64748b;
-        --focus-ring: rgba(15, 23, 42, 0.15);
-        color-scheme: light dark;
+        --input-bg: #f1f5f9;
+        --console-bg: #0f172a;
+        --console-text: #4ade80; /* Verde matrix pa' que se vea criminal */
       }
 
       body {
-        font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         padding: 20px;
         background-color: var(--bg-body);
-        color: #1e293b;
-        /* Centramos la tarjeta en la pantalla pa' que se vea serio */
+        /* Un degradado sutil en el fondo pa' que no sea aburrido */
+        background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+        background-size: 24px 24px;
+        color: var(--text-main);
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -33,57 +39,66 @@
       .card {
         background-color: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px;
+        border-radius: 24px; /* Bordes más redondeados, estilo iOS/Moderno */
+        padding: 32px; /* Más aire pa' que respire */
         width: 100%;
-        max-width: 520px; /* Le ponemos un tope pa' que no se desparrame */
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        max-width: 600px; /* La agrandé un pelo pa' que no se vea chiquitica */
+        /* Sombra profunda para dar efecto 3D */
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       }
 
       label {
         display: block;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--text-muted);
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
 
       input, select, button {
         width: 100%;
-        height: 44px;
-        border-radius: 8px; /* Bordes un pelín más cerrados */
-        border: 1px solid var(--border);
-        padding: 0 12px;
-        font-size: 14px;
-        box-sizing: border-box; /* Importante pa' que no se salga del cajón */
-        transition: all 0.2s ease-in-out;
-        background-color: #fff;
+        height: 48px; /* Un pelín más altos pa' dedos gordos o pantallas táctiles */
+        border-radius: 12px;
+        border: 2px solid transparent; /* Truco pa' la transición del borde */
+        padding: 0 16px;
+        font-size: 15px;
+        box-sizing: border-box;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: var(--input-bg);
+        color: var(--text-main);
+      }
+
+      /* Efecto moderno: el borde aparece suave */
+      input:hover, select:hover {
+        background-color: #e2e8f0;
       }
 
       input:focus, select:focus {
         outline: none;
+        background-color: #fff;
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--focus-ring);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
       }
 
       button {
-        font-weight: 600;
-        background: var(--primary);
+        font-weight: 700;
+        /* Un degradado elegante */
+        background: linear-gradient(135deg, var(--accent) 0%, #334155 100%);
         color: white;
         cursor: pointer;
         border: none;
-        margin-top: 8px;
+        margin-top: 12px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-size: 13px;
+        font-size: 14px;
+        box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2);
       }
 
       button:hover {
-        background-color: #1e293b;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px); /* Se levanta un poquito */
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
       }
 
       button:active {
@@ -91,36 +106,52 @@
       }
 
       button:disabled {
-        opacity: 0.6;
+        opacity: 0.7;
         cursor: not-allowed;
+        background: var(--text-muted);
         transform: none;
         box-shadow: none;
       }
 
+      /* La joya de la corona: La consola moderna */
       pre {
         margin: 0;
         white-space: pre-wrap;
         word-break: break-word;
-        font-size: 12px;
-        font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-        padding: 16px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: #f8fafc;
-        color: #334155;
-        min-height: 60px; /* Altura mínima pa' que no se vea feo vacío */
+        font-size: 13px;
+        font-family: 'Menlo', 'Consolas', monospace;
+        padding: 20px;
+        border-radius: 12px;
+        background: var(--console-bg);
+        color: var(--console-text); /* Texto verde hacker */
+        min-height: 100px;
+        border: 1px solid #1e293b;
+        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+      }
+      
+      /* Scrollbar bonito para el pre */
+      pre::-webkit-scrollbar {
+        width: 8px;
+      }
+      pre::-webkit-scrollbar-track {
+        background: var(--console-bg);
+      }
+      pre::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 4px;
       }
 
       .grid {
         display: grid;
-        gap: 16px; /* Un pelín más de aire */
+        gap: 20px;
       }
 
       @media (min-width: 560px) {
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 16px;
+          gap: 20px;
         }
       }
       /* --- FIN DEL CSS --- */
@@ -147,10 +178,10 @@
 
           <div id="fields" class="grid"></div>
 
-          <button id="btnRun" type="button">Run</button>
+          <button id="btnRun" type="button">Run Action</button>
         </div>
 
-        <pre id="out"></pre>
+        <pre id="out">// Waiting for command...</pre>
       </div>
     </div>
     <script type="module" src="./app.js"></script>
